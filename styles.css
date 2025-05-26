@@ -29,7 +29,3 @@ button {
   border: 1px solid #ccc;
   box-sizing: border-box;
 }
-
-.square.hovered {
-  background-color: black;
-}

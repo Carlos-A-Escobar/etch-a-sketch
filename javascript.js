@@ -1,6 +1,13 @@
 const container = document.querySelector('.container');
 const resizeBtn = document.getElementById('resizeBtn');
 
+function getRandomRGB() {
+  const r = Math.floor(Math.random() * 256);
+  const g = Math.floor(Math.random() * 256);
+  const b = Math.floor(Math.random() * 256);
+  return `rgb(${r}, ${g}, ${b})`;
+}
+
 function createGrid(size) {
   container.innerHTML = ''; // Clear previous grid
 
@@ -12,8 +19,16 @@ function createGrid(size) {
     square.style.width = `${squareSize}px`;
     square.style.height = `${squareSize}px`;
 
+    square.dataset.opacity = 0;
+
     square.addEventListener('mouseenter', () => {
-      square.classList.add('hovered');
+      let currentOpacity = parseFloat(square.dataset.opacity);
+      if (currentOpacity < 1) {
+        currentOpacity = Math.min(currentOpacity + 0.1, 1);
+        square.style.backgroundColor = getRandomRGB();
+        square.style.opacity = currentOpacity;
+        square.dataset.opacity = currentOpacity;
+      }
     });
 
     container.appendChild(square);
